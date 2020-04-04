@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class signup extends AppCompatActivity {
     EditText password,id,birthday,name,email;
     private FirebaseAuth mAuth;
-    Button Signup;
+    Button Signup,pass;
     FirebaseDatabase database;
     DatabaseReference myRef;
     teacher t;
@@ -63,8 +63,17 @@ public class signup extends AppCompatActivity {
                     myRef.push().setValue(t);
 
                 }
+                Intent i= new Intent(signup.this,signin.class);
+                startActivity(i);
 
-
+            }
+        });
+        pass=findViewById(R.id.pass);
+        pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(signup.this,signin.class);
+                startActivity(i);
             }
         });
 

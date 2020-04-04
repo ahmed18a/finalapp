@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
          drawer=findViewById(R.id.drwaer_layout);
          navigationView=findViewById(R.id.navigation_view);
-         mAppBarConfiguration=new AppBarConfiguration.Builder(R.id.work,R.id.notifications,R.id.profile,R.id.message).setDrawerLayout(drawer).build();
+         mAppBarConfiguration=new AppBarConfiguration.Builder(R.id.work,R.id.notifications,R.id.profile,R.id.message,R.id.weeksched).setDrawerLayout(drawer).build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         navigationView.setNavigationItemSelectedListener(this);
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.weeksched:
             case R.id.profile:
             case R.id.message:
             case R.id.work:

@@ -13,12 +13,12 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".addschedule"></activity>
         <activity android:name=".signin" />
-        <activity android:name=".signup" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".addstudent" />
         <activity android:name=".picktime" />
         <activity android:name=".perla" />
         <activity
-            android:name=".MainActivity"
+            android:name=".signup"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
