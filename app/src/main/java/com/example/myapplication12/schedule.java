@@ -1,16 +1,38 @@
 package com.example.myapplication12;
 
-public class schedule {
-    public String [][] day ;
+import java.util.Arrays;
 
-    public schedule(String[][] day) {
+public class schedule {
+public lesson schedul[];
+public String day;
+
+    public schedule(lesson[] schedul, String day) {
+        this.schedul = schedul;
         this.day = day;
     }
 
-    public String[] getdaysschedule(int i){
-        String re[]= new String[8];
-        for (int d=0;d<day[i][0].length();d++)
-            re[d]=day[i][d];
-        return re;
+
+    public lesson[] getSchedul() {
+        return schedul;
+    }
+
+    public void setSchedul(lesson[] schedul) {
+        this.schedul = schedul;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    @Override
+    public String toString() {
+        return "schedule{" +
+                "schedul=" + Arrays.toString(schedul) +
+                ", day='" + day + '\'' +
+                '}';
     }
 }

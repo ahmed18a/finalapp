@@ -63,8 +63,6 @@ public class signup extends AppCompatActivity {
                     myRef.push().setValue(t);
 
                 }
-                Intent i= new Intent(signup.this,signin.class);
-                startActivity(i);
 
             }
         });
@@ -89,6 +87,10 @@ public class signup extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(signup.this,"you succesfully signed up",Toast.LENGTH_SHORT).show();
+                            mAuth.getCurrentUser().sendEmailVerification();
+                            Toast.makeText(signup.this, "verfication was sent to your email", Toast.LENGTH_SHORT).show();
+                            Intent i =new Intent(signup.this,signin.class);
+                            startActivity(i);
 
                         }
                         else{

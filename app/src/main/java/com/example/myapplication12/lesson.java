@@ -1,27 +1,25 @@
 package com.example.myapplication12;
 
 public class lesson {
-    public int day;
+    public String day;
     public String clas;
     public int number;
     public String subject;
-    public String learned;
-    public String homework;
 
-    public lesson(int day, String clas, int number, String subject, String learned, String homework) {
+
+    public lesson(String clas, String day, int number, String subject) {
         this.day = day;
         this.clas = clas;
         this.number = number;
         this.subject = subject;
-        this.learned = learned;
-        this.homework = homework;
+
     }
 
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
@@ -49,22 +47,6 @@ public class lesson {
         this.subject = subject;
     }
 
-    public String getLearned() {
-        return learned;
-    }
-
-    public void setLearned(String learned) {
-        this.learned = learned;
-    }
-
-    public String getHomework() {
-        return homework;
-    }
-
-    public void setHomework(String homework) {
-        this.homework = homework;
-    }
-
     @Override
     public String toString() {
         return "lesson{" +
@@ -72,8 +54,6 @@ public class lesson {
                 ", clas='" + clas + '\'' +
                 ", number=" + number +
                 ", subject='" + subject + '\'' +
-                ", learned='" + learned + '\'' +
-                ", homework='" + homework + '\'' +
                 '}';
     }
 }

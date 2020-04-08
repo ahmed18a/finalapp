@@ -18,8 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class signin extends AppCompatActivity {
     private FirebaseAuth auth;
     EditText email;
-    Button signin;
+    Button signin, forgot,button;
     EditText password;
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,16 @@ public class signin extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        forgot=findViewById(R.id.forgot);
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                if(!email.getText().toString().isEmpty())
+                    mAuth.sendPasswordResetEmail(email.getText().toString());
 
+            }
+        });
     }
     public void signin(){
         email= findViewById(R.id.email);

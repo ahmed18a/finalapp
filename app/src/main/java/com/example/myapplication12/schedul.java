@@ -62,7 +62,7 @@ public class schedul extends Fragment {
         myRef2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = dataSnapshot.getValue().toString();
+                String value = dataSnapshot.child("subject").getValue().toString();
                 user.add(value);
                 adapter.notifyDataSetChanged();
             }
@@ -85,6 +85,15 @@ public class schedul extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+        List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getContext(),popuple.class);
+                i.putExtra("position",String.valueOf(position+1));
+                i.putExtra("day",day);
+                startActivity(i);
             }
         });
     }
