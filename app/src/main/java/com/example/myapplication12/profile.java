@@ -90,24 +90,23 @@ public class profile extends Fragment {
         database = FirebaseDatabase.getInstance();
         user= FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
-        myRef=database.getReference("teachers"+uid);
+        myRef=database.getReference("teacher");
         name=view.findViewById(R.id.name);
         birthday=view.findViewById(R.id.birthday);
         id=view.findViewById(R.id.id);
         password=view.findViewById(R.id.password);
         save=view.findViewById(R.id.save);
         email=view.findViewById(R.id.email);
-        Query query=myRef.orderByChild("email").equalTo(user.getEmail());
+        Query query=myRef.orderByChild("username").equalTo(user.getEmail());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d:dataSnapshot.getChildren()){
-                    t=d.getValue(teacher.class);
-                    name.setText(t.getName());
-                    birthday.setText(t.getBirthday());
-                    id.setText(String.valueOf(t.getId()));
-                    password.setText(t.getPassword());
-                    email.setText(t.getUsername());
+                    name.setText(d.child("name").getValue().toString());
+                    birthday.setText(d.child("birthday").getValue().toString());
+                    id.setText((d.child("id").getValue().toString()));
+                    password.setText(d.child("password").getValue().toString());
+                    email.setText(d.child("username").getValue().toString());
                 }
             }
 
@@ -121,12 +120,9 @@ public class profile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(),MainActivity.class));
-                t.setName(name.getText().toString());
-                t.setBirthday(birthday.getText().toString());
-                t.setId(Float.parseFloat(id.getText().toString()));
-                t.setUsername(email.getText().toString());
+                t=new teacher(name.getText().toString(),email.getText().toString(),password.getText().toString(),Float.parseFloat(id.getText().toString()),birthday.getText().toString());
 
-                Query query=myRef.orderByChild("email").equalTo("i");
+                Query query=myRef.orderByChild("username").equalTo(user.getEmail());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

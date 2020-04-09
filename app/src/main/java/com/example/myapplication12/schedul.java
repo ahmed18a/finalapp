@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +36,8 @@ public class schedul extends Fragment {
     ListView List;
     ArrayList<String> user;
     String day;
+    FirebaseUser use;
+    String uid;
 
     public schedul(String day) {
         this.day=day;
@@ -54,9 +58,11 @@ public class schedul extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         database= FirebaseDatabase.getInstance();
+        use= FirebaseAuth.getInstance().getCurrentUser();
+        uid=use.getUid();
         user = new ArrayList<>();
         List = view.findViewById(R.id.List);
-        myRef2 = database.getReference(day);
+        myRef2 = database.getReference(day+uid);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, user);
         List.setAdapter(adapter);
         myRef2.addChildEventListener(new ChildEventListener() {

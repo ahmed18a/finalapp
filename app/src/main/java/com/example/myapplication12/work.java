@@ -167,7 +167,7 @@ public class work extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(),perla.class);
-                i.putExtra("class",c);
+                i.putExtra("class",String.valueOf(c));
                 i.putExtra("name",(String) parent.getItemAtPosition(position));
                 startActivity(i);
             }
