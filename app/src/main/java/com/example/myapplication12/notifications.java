@@ -37,7 +37,7 @@ public class notifications extends Fragment {
     private LinearLayout parentLayout;
     private int hint=0;
     FirebaseDatabase database ;
-    Button save;
+    Button save,see;
     DatabaseReference myRef ;
     EditText temp;
     ImageView button;
@@ -115,6 +115,14 @@ public class notifications extends Fragment {
                 s=temp.getText().toString();
                 myRef.push().setValue(s);
 
+            }
+        });
+        see=view.findViewById(R.id.see);
+        see.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(),seenotifications.class);
+                startActivity(i);
             }
         });
 

@@ -11,13 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".popuple"></activity>
+        <activity android:name=".seenotifications"></activity>
+        <activity
+            android:name=".popuple"
+            android:theme="@style/AppTheme.popup"></activity>
         <activity android:name=".addschedule" />
         <activity android:name=".signin" />
         <activity android:name=".MainActivity" />
         <activity android:name=".addstudent" />
         <activity android:name=".picktime" />
-        <activity android:name=".perla" />
+        <activity
+            android:name=".perla"
+            android:theme="@style/AppTheme.popup"></activity>
         <activity
             android:name=".signup"
             android:theme="@style/AppTheme.NoActionBar">

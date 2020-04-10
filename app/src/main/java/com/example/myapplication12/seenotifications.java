@@ -1,19 +1,14 @@
 package com.example.myapplication12;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,54 +20,33 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class schedul extends Fragment {
-    private View convertview;
+public class seenotifications extends AppCompatActivity {
     FirebaseDatabase database ;
     DatabaseReference myRef2;
-    private ListView List;
-    ArrayList<String> user,lesson;
-    String day;
+    ListView List;
+    ArrayList<String> user,Id;
     FirebaseUser use;
     String uid;
-
-    public schedul(String day) {
-        this.day=day;
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        if(convertview==null)
-            convertview=inflater.inflate(R.layout.fragment_schedul,container,false);
-        return convertview;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        database= FirebaseDatabase.getInstance();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seenotifications);
         use= FirebaseAuth.getInstance().getCurrentUser();
         uid=use.getUid();
+        database=FirebaseDatabase.getInstance();
+        myRef2 = database.getReference("notifications" +uid);
         user = new ArrayList<>();
-        List = view.findViewById(R.id.List);
-        myRef2 = database.getReference(day+uid);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, user);
+        List = findViewById(R.id.List);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(seenotifications.this, android.R.layout.simple_list_item_1, user);
         List.setAdapter(adapter);
-        lesson=new ArrayList<>();
+        Id=new ArrayList<>();
         myRef2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = dataSnapshot.child("subject").getValue().toString();
+                String value = dataSnapshot.getValue().toString();
                 user.add(value);
                 adapter.notifyDataSetChanged();
-                lesson.add(dataSnapshot.child("number").getValue().toString());
+                Id.add(dataSnapshot.getKey());
             }
 
             @Override
@@ -98,10 +72,7 @@ public class schedul extends Fragment {
         List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getContext(),popuple.class);
-                i.putExtra("position",String.valueOf(lesson.get(position)));
-                i.putExtra("day",day);
-                startActivity(i);
+                myRef2.child(Id.get(position)).removeValue();
             }
         });
     }

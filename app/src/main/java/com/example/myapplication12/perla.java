@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class perla extends AppCompatActivity {
     ImageView addabsence,addlate;
     FirebaseUser user;
     String uid;
+    Button delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +127,14 @@ public class perla extends AppCompatActivity {
                         late=findViewById(R.id.late);
                         absence.setText(d.child("absence").getValue().toString());
                         late.setText(d.child("late").getValue().toString());
+                        delete=findViewById(R.id.delete);
+                        final String b=d.getKey();
+                        delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                myRef.child(b).removeValue();
+                            }
+                        });
 
                     }
 

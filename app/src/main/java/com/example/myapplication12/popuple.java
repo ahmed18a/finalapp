@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class popuple extends Activity {
 TextView day,subject,clas,number;
     FirebaseUser user;
     String uid;
+    Button delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +47,11 @@ TextView day,subject,clas,number;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         user= FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
-        DatabaseReference myRef = database.getReference(i.getStringExtra("day")+uid);
+        final DatabaseReference myRef = database.getReference(i.getStringExtra("day")+uid);
         Query query=myRef.orderByChild("number").equalTo(Integer.parseInt(s));
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                 for (DataSnapshot d:dataSnapshot.getChildren()) {
                     day = findViewById(R.id.day);
@@ -59,6 +62,14 @@ TextView day,subject,clas,number;
                     subject.setText(d.child("subject").getValue().toString());
                     clas.setText(d.child("clas").getValue().toString());
                     number.setText(d.child("number").getValue().toString());
+                    delete=findViewById(R.id.delete);
+                   final String b=d.getKey();
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myRef.child(b).removeValue();
+                        }
+                    });
                 }
 
                 }
@@ -69,6 +80,8 @@ TextView day,subject,clas,number;
 
             }
         });
+
+
 
     }
 }
