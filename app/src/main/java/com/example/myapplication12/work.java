@@ -43,8 +43,6 @@ public class work extends Fragment {
     ImageView add;
     Button button;
     int c;
-    ImageView button2;
-    Intent i;
     FirebaseUser use;
     String uid;
     // TODO: Rename parameter arguments, choose names that match
@@ -150,7 +148,8 @@ public class work extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                adapter.remove(dataSnapshot.child("name").getValue().toString());
+                adapter.notifyDataSetChanged();
             }
 
             @Override

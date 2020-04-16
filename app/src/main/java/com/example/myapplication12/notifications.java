@@ -40,8 +40,6 @@ public class notifications extends Fragment {
     Button save,see;
     DatabaseReference myRef ;
     EditText temp;
-    ImageView button;
-    Intent i;
     String s;
     FirebaseUser user;
     String uid;

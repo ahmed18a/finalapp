@@ -68,6 +68,7 @@ TextView day,subject,clas,number;
                         @Override
                         public void onClick(View v) {
                             myRef.child(b).removeValue();
+                            finish();
                         }
                     });
                 }

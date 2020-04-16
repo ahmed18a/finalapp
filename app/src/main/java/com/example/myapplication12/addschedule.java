@@ -29,12 +29,12 @@ public class addschedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addschedule);
         database= FirebaseDatabase.getInstance();
+        c=0;
         user= FirebaseAuth.getInstance().getCurrentUser();
         uid=user.getUid();
         save=findViewById(R.id.save);
         Toast.makeText(this, "you can enter 7 7ss", Toast.LENGTH_SHORT).show();
         lessons=new lesson[8];
-        if(c<8) {
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -46,7 +46,7 @@ public class addschedule extends AppCompatActivity {
                     c++;
                     if (c==7) {
                         makedaysched();
-                        c=0;
+                        finish();
                     }
                 }
             });
@@ -59,34 +59,30 @@ public class addschedule extends AppCompatActivity {
                     clas=findViewById(R.id.clas);
                     number=findViewById(R.id.number);
                     lessons[c]=new lesson(clas.getText().toString(),day.getText().toString(),Integer.parseInt(number.getText().toString()),subject.getText().toString());
-                    c++;
                     if (c<7) {
                         makedaysched();
-                        c=0;
                     }
                     finish();
                 }
             });
 
 
-        }
-        else{
-            save.setVisibility(View.INVISIBLE);
-        }
 
     }
     public void makedaysched(){
-        lesson lesson2[]=new lesson[c+1];
-        for (int i=1;i<c+1;i++){
+        lesson lesson2[]=new lesson[8];
+        for (int i=1;i<8;i++){
             for (int j=1;j<c+1;j++){
                 if(lessons[j-1].getNumber()==i)
-                    lesson2[i-1]=lessons[j-1];
+                    lesson2[j-1]=lessons[j-1];
             }
 
         }
-        sched=new schedule(lesson2,lesson2[0].getDay());
+        sched=new schedule(lesson2,lessons[0].getDay());
         myRef2=database.getReference(sched.getDay()+uid);
         for (int i=0;i<c+1;i++)
             myRef2.push().setValue(lesson2[i]);
+        c=0;
     }
+
 }

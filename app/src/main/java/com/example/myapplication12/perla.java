@@ -66,7 +66,7 @@ public class perla extends AppCompatActivity {
                                 student s=new student(d.child("name").getValue().toString(),Float.parseFloat(d.child("id").getValue().toString()),d.child("clas").getValue().toString(),Integer.parseInt(d.child("absence").getValue().toString()),Integer.parseInt(d.child("late").getValue().toString()));
                                 s.setAbsence(s.getAbsence()+1);
                                 myRef.child(d.getKey()).setValue(s);
-                                absence.setText(d.child("absence").getValue().toString());
+                                absence.setText(String.valueOf(Integer.parseInt(d.child("absence").getValue().toString())+1));
                                 late.setText(d.child("late").getValue().toString());
 
                             }
@@ -99,10 +99,9 @@ public class perla extends AppCompatActivity {
                                 s.setLate(s.getLate()+1);
                                 myRef.child(d.getKey()).setValue(s);
                                 absence.setText(d.child("absence").getValue().toString());
-                                late.setText(d.child("late").getValue().toString());
+                                late.setText(String.valueOf(Integer.parseInt(d.child("late").getValue().toString())+1));
 
                             }
-
                         }
                     }
 
@@ -111,6 +110,7 @@ public class perla extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
         Intent i=getIntent();
@@ -133,6 +133,7 @@ public class perla extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 myRef.child(b).removeValue();
+                                finish();
                             }
                         });
 

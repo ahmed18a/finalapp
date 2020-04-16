@@ -73,7 +73,10 @@ public class seenotifications extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myRef2.child(Id.get(position)).removeValue();
+                adapter.remove(parent.getItemAtPosition(position).toString());
+                adapter.notifyDataSetChanged();
             }
         });
     }
+
 }

@@ -71,11 +71,31 @@ public class weeksched extends Fragment {
 
     private void makefr(){
         arrayf=new ArrayList<>();
-        arrayf.add(new schedul("sunday"));
-        arrayf.add(new schedul("monday"));
-        arrayf.add(new schedul("tuesday"));
-        arrayf.add(new schedul("wednesday"));
-        arrayf.add(new schedul("thursday"));
+        schedul sunday=new schedul();
+        Bundle args1=new Bundle();
+        args1.putString("day","sunday");
+        sunday.setArguments(args1);
+        schedul monday=new schedul();
+        Bundle args2=new Bundle();
+        args2.putString("day","monday");
+        monday.setArguments(args2);
+        schedul tuesday=new schedul();
+        Bundle args3=new Bundle();
+        args3.putString("day","tuesday");
+        tuesday.setArguments(args3);
+        schedul wednesday=new schedul();
+        Bundle args4=new Bundle();
+        args4.putString("day","wednesday");
+        wednesday.setArguments(args4);
+        schedul thursday=new schedul();
+        Bundle args5=new Bundle();
+        args5.putString("day","thursday");
+        thursday.setArguments(args5);
+        arrayf.add(sunday);
+        arrayf.add(monday);
+        arrayf.add(tuesday);
+        arrayf.add(wednesday);
+        arrayf.add(thursday);
 
     }
     private void makea(){

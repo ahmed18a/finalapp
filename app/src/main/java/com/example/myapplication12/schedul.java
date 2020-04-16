@@ -39,8 +39,7 @@ public class schedul extends Fragment {
     FirebaseUser use;
     String uid;
 
-    public schedul(String day) {
-        this.day=day;
+    public schedul() {
         // Required empty public constructor
     }
 
@@ -60,10 +59,13 @@ public class schedul extends Fragment {
         database= FirebaseDatabase.getInstance();
         use= FirebaseAuth.getInstance().getCurrentUser();
         uid=use.getUid();
+        if(getArguments()!=null)
+            day=getArguments().getString("day");
         user = new ArrayList<>();
         List = view.findViewById(R.id.List);
         myRef2 = database.getReference(day+uid);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, user);
+        adapter.notifyDataSetChanged();
         List.setAdapter(adapter);
         lesson=new ArrayList<>();
         myRef2.addChildEventListener(new ChildEventListener() {
@@ -82,6 +84,8 @@ public class schedul extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                adapter.remove(dataSnapshot.child("subject").getValue().toString());
+                adapter.notifyDataSetChanged();
 
             }
 
