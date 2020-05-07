@@ -37,13 +37,6 @@ public class signup extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         myRef = database.getReference("teacher");
         name = (EditText) findViewById(R.id.name);
-        birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i= new Intent(signup.this,picktime.class);
-                startActivity(i);
-            }
-        });
         Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +67,13 @@ public class signup extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(signup.this,picktime.class);
+                startActivity(i);
+            }
+        });
 
 
 
@@ -100,5 +100,13 @@ public class signup extends AppCompatActivity {
                     }
                 });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent i=getIntent();
+        birthday.setText(i.getStringExtra("date"));
+        Toast.makeText(this, ""+birthday.getText().toString(), Toast.LENGTH_SHORT).show();
     }
+}
 

@@ -1,5 +1,6 @@
 package com.example.myapplication12;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,8 +11,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class addschedule extends AppCompatActivity {
     FirebaseDatabase database ;
@@ -48,6 +53,24 @@ public class addschedule extends AppCompatActivity {
                         makedaysched();
                         finish();
                     }
+                    myRef2=database.getReference(day.getText().toString()+uid);
+                    Query query=myRef2.orderByChild("number").equalTo(Integer.parseInt(number.getText().toString()));
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                for (DataSnapshot d:dataSnapshot.getChildren()) {
+                                    myRef2.child(d.getKey()).removeValue();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             });
             ret=findViewById(R.id.ret);

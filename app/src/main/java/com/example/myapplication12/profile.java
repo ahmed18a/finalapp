@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,8 @@ import com.google.firebase.database.ValueEventListener;
  * create an instance of this fragment.
  */
 public class profile extends Fragment {
-    EditText name,email,password,id,birthday;
+    EditText name,id,birthday;
+    TextView email,password;
     Button save;
     teacher t;
     FirebaseDatabase database;

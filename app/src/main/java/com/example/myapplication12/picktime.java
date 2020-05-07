@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -20,6 +22,8 @@ public class picktime extends AppCompatActivity {
     private TextView textViewDate;
     private TimePickerDialog timePickerDialog;
     private DatePickerDialog datePickerDialog;
+    TextView timeshow,dateshow;
+    Button ret;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,16 @@ public class picktime extends AppCompatActivity {
             }
         });
         textViewDate = findViewById(R.id.dateshow);
+        ret=findViewById(R.id.ret);
+        ret.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(picktime.this,signup.class);
+                dateshow=findViewById(R.id.dateshow);
+                i.putExtra("date",dateshow.getText().toString());
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -67,9 +81,12 @@ public class picktime extends AppCompatActivity {
             public void onDateSet(android.widget.DatePicker datePicker, int year, int month, int dayOfMonth) {
                 String date = dayOfMonth+"/"+(month+1)+"/"+year;
                 /// here set date value in txtview
+                dateshow=findViewById(R.id.dateshow);
+                dateshow.setText(date);
             }
         },calendar.get( java.util.Calendar.YEAR),calendar.get( java.util.Calendar.MONTH ),calendar.get( java.util.Calendar.DAY_OF_MONTH ) );
         datePickerDialog.show();
+
     }
 
     private void PickTime(){
@@ -78,6 +95,8 @@ public class picktime extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 String time = hourOfDay + ":"+minute;
                 /// here set time value in txtview
+                timeshow=findViewById(R.id.timeshow);
+                timeshow.setText(time);
 
 
             }
