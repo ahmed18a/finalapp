@@ -72,7 +72,7 @@ public class schedul extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String value = dataSnapshot.child("subject").getValue().toString();
-                user.add(value);
+                adapter.add(value);
                 adapter.notifyDataSetChanged();
                 lesson.add(dataSnapshot.child("number").getValue().toString());
             }

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.myapplication12.adapter.viewpageradapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class weeksched extends Fragment {
     private viewpageradapter adapter;
     private ArrayList<Fragment> arrayf;
     private ArrayList<String>arrayList;
-    Button add;
     private FragmentActivity myContext;
+    FloatingActionButton button;
 
     public weeksched() {
         // Required empty public constructor
@@ -58,11 +59,11 @@ public class weeksched extends Fragment {
         makefr();
         makea();
         setViewPager();
-        add=view.findViewById(R.id.add);
-        add.setOnClickListener(new View.OnClickListener() {
+        button=view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getContext(),addschedule.class);
+                Intent i= new Intent(getContext(),addschedule.class);
                 startActivity(i);
             }
         });

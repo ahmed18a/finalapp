@@ -5,13 +5,18 @@ public class lesson {
     public String clas;
     public int number;
     public String subject;
+    public String learned;
+    public String homework;
 
 
-    public lesson(String clas, String day, int number, String subject) {
+
+    public lesson(String clas, String day, int number, String subject,String learned,String homework) {
         this.day = day;
         this.clas = clas;
         this.number = number;
         this.subject = subject;
+        this.learned=learned;
+        this.homework=homework;
 
     }
 

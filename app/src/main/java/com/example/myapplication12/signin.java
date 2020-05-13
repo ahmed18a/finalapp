@@ -1,17 +1,21 @@
 package com.example.myapplication12;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -53,6 +58,9 @@ public class signin extends AppCompatActivity {
         email= findViewById(R.id.email);
         signin=findViewById(R.id.signin);
         password = findViewById(R.id.password);
+        Date currentdate=new Date();
+        SimpleDateFormat timeformat= new SimpleDateFormat("mm");
+        final String t= timeformat.format(currentdate);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,9 +69,9 @@ public class signin extends AppCompatActivity {
                 if(password.getText().toString().isEmpty())
                     password.setError("please enter password");
                 signin();
+                notificationview();
+                }
 
-
-            }
         });
         forgot=findViewById(R.id.forgot);
         forgot.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +83,7 @@ public class signin extends AppCompatActivity {
 
             }
         });
+
     }
     public void signin(){
         email= findViewById(R.id.email);
@@ -146,6 +155,35 @@ public class signin extends AppCompatActivity {
 
                     }
                 });
+    }
+    public void notificationview (){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    CharSequence name = "birthday";
+                    String description = "hello";
+                    int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+                    channel.setDescription(description);
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(channel);
+                }
+                Intent i =new Intent(signin.this,seenotifications.class);
+                PendingIntent intent= PendingIntent.getActivity(getApplicationContext(),1,i, PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                        .setContentTitle("notifications")
+                        .setContentText("time to view your notifications")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setAutoCancel(true)
+                        .setContentIntent(intent);
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                notificationManager.notify(1, builder.build());
+            }
+        }, 100000);
     }
 
 }

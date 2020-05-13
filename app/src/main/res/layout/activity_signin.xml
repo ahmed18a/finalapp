@@ -48,7 +48,7 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Button"
+        android:text="signin"
         android:background="@drawable/buttonstyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

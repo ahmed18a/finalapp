@@ -47,7 +47,7 @@ public class addschedule extends AppCompatActivity {
                     subject=findViewById(R.id.lesson);
                     clas=findViewById(R.id.clas);
                     number=findViewById(R.id.number);
-                    lessons[c]=new lesson(clas.getText().toString(),day.getText().toString(),Integer.parseInt(number.getText().toString()),subject.getText().toString());
+                    lessons[c]=new lesson(clas.getText().toString(),day.getText().toString(),Integer.parseInt(number.getText().toString()),subject.getText().toString(),"","");
                     c++;
                     if (c==7) {
                         makedaysched();
@@ -81,7 +81,7 @@ public class addschedule extends AppCompatActivity {
                     subject=findViewById(R.id.lesson);
                     clas=findViewById(R.id.clas);
                     number=findViewById(R.id.number);
-                    lessons[c]=new lesson(clas.getText().toString(),day.getText().toString(),Integer.parseInt(number.getText().toString()),subject.getText().toString());
+                    lessons[c]=new lesson(clas.getText().toString(),day.getText().toString(),Integer.parseInt(number.getText().toString()),subject.getText().toString(),"","");
                     if (c<7) {
                         makedaysched();
                     }

@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="520dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:srcCompat="@drawable/add" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,12 +29,6 @@
             android:padding="@dimen/cardview_compat_inset_shadow"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="add" />
 
 
         <com.google.android.material.tabs.TabLayout
