@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seenotifications">
+    tools:context=".seenotifications"
+    android:background="@drawable/schoolo">
 
     <ListView
         android:id="@+id/List"
