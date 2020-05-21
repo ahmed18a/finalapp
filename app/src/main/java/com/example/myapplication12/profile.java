@@ -1,5 +1,7 @@
 package com.example.myapplication12;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +42,7 @@ public class profile extends Fragment {
     DatabaseReference myRef ;
     FirebaseUser user;
     String uid;
+    FloatingActionButton logout;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,6 +103,31 @@ public class profile extends Fragment {
         password=view.findViewById(R.id.password);
         save=view.findViewById(R.id.save);
         email=view.findViewById(R.id.email);
+        logout=view.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder myalertbuilder= new AlertDialog.Builder(getContext());
+                myalertbuilder.setTitle("title");
+                myalertbuilder.setMessage("are you sure you want to sign out");
+                myalertbuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent i =new Intent(getContext(),signup.class);
+                        startActivity(i);
+                    }
+                });
+                myalertbuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "okay", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                myalertbuilder.show();
+
+            }
+        });
         Query query=myRef.orderByChild("username").equalTo(user.getEmail());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

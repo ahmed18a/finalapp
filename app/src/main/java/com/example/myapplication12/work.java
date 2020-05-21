@@ -137,7 +137,7 @@ public class work extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String value = dataSnapshot.child("name").getValue().toString();
-                user.add(value);
+                adapter.add(value);
                 adapter.notifyDataSetChanged();
             }
 

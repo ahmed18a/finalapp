@@ -6,6 +6,7 @@
     <item
         android:id="@+id/weeksched"
         android:title="weekschedule"
+        android:icon="@drawable/ic_schedule_black_24dp"
         />
     <item
         android:id="@+id/notifications"
@@ -21,5 +22,6 @@
         android:icon="@drawable/ic_message_black_24dp"/>
     <item
         android:id="@+id/profile"
-        android:title="profile" />
+        android:title="profile"
+        android:icon="@drawable/ic_person_black_24dp"/>
 </menu>

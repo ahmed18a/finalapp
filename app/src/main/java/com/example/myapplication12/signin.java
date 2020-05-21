@@ -69,7 +69,7 @@ public class signin extends AppCompatActivity {
                 if(password.getText().toString().isEmpty())
                     password.setError("please enter password");
                 signin();
-                notificationview();
+
                 }
 
         });
@@ -156,34 +156,6 @@ public class signin extends AppCompatActivity {
                     }
                 });
     }
-    public void notificationview (){
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    CharSequence name = "birthday";
-                    String description = "hello";
-                    int importance = NotificationManager.IMPORTANCE_DEFAULT;
-                    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-                    channel.setDescription(description);
-                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
-                    notificationManager.createNotificationChannel(channel);
-                }
-                Intent i =new Intent(signin.this,seenotifications.class);
-                PendingIntent intent= PendingIntent.getActivity(getApplicationContext(),1,i, PendingIntent.FLAG_UPDATE_CURRENT);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                        .setContentTitle("notifications")
-                        .setContentText("time to view your notifications")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setAutoCancel(true)
-                        .setContentIntent(intent);
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
 
-                notificationManager.notify(1, builder.build());
-            }
-        }, 100000);
-    }
 
 }

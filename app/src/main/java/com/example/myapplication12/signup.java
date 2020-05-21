@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,7 +25,6 @@ public class signup extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     teacher t;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,9 @@ public class signup extends AppCompatActivity {
         Signup = (Button) findViewById(R.id.signup);
         database = FirebaseDatabase.getInstance();
         email = (EditText) findViewById(R.id.email);
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser()!=null)
+            startActivity(new Intent(signup.this,MainActivity.class));
         myRef = database.getReference("teacher");
         name = (EditText) findViewById(R.id.name);
         Signup.setOnClickListener(new View.OnClickListener() {
