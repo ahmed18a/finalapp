@@ -53,6 +53,7 @@ public class schedul extends Fragment {
         return convertview;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -65,7 +66,6 @@ public class schedul extends Fragment {
         List = view.findViewById(R.id.List);
         myRef2 = database.getReference(day+uid);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, user);
-        adapter.notifyDataSetChanged();
         List.setAdapter(adapter);
         lesson=new ArrayList<>();
         myRef2.addChildEventListener(new ChildEventListener() {
