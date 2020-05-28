@@ -70,13 +70,6 @@ public class signup extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        birthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(signup.this,picktime.class);
-                startActivity(i);
-            }
-        });
 
 
 

@@ -103,7 +103,7 @@ public class addschedule extends AppCompatActivity {
             for (int i = 1; i < 8; i++) {
                 for (int j = 1; j < c + 1; j++) {
                     if (lessons[j - 1].getNumber() == i)
-                        lesson2[j - 1] = lessons[j - 1];
+                        lesson2[i] = lessons[j - 1];
                 }
 
             }
