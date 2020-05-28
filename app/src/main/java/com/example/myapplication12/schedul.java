@@ -68,6 +68,7 @@ public class schedul extends Fragment {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, user);
         List.setAdapter(adapter);
         lesson=new ArrayList<>();
+        adapter.notifyDataSetChanged();
         myRef2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
