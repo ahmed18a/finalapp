@@ -108,7 +108,7 @@ public class profile extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder myalertbuilder= new AlertDialog.Builder(getContext());
-                myalertbuilder.setTitle("title");
+                myalertbuilder.setTitle("Sure!!!");
                 myalertbuilder.setMessage("are you sure you want to sign out");
                 myalertbuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override

@@ -22,6 +22,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -76,6 +78,26 @@ public class schedul extends Fragment {
                 adapter.add(value);
                 adapter.notifyDataSetChanged();
                 lesson.add(dataSnapshot.child("number").getValue().toString());
+                Query query=myRef2.orderByChild("number").equalTo(dataSnapshot.child("number").getValue().toString());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for (DataSnapshot d:dataSnapshot.getChildren()) {
+                                adapter.remove(d.getKey());
+                                lesson.remove(d.getKey());
+                                myRef2.child(d.getKey()).removeValue();
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -85,6 +107,7 @@ public class schedul extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                lesson.remove(dataSnapshot.child("number").getValue().toString());
                 adapter.remove(dataSnapshot.child("subject").getValue().toString());
                 adapter.notifyDataSetChanged();
 
@@ -103,6 +126,7 @@ public class schedul extends Fragment {
         List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.notifyDataSetChanged();
                 Intent i = new Intent(getContext(),popuple.class);
                 i.putExtra("position",String.valueOf(lesson.get(position)));
                 i.putExtra("day",day);
