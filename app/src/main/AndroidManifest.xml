@@ -19,7 +19,6 @@
         <activity android:name=".signin" />
         <activity android:name=".MainActivity" />
         <activity android:name=".addstudent" />
-        <activity android:name=".picktime" />
         <activity
             android:name=".perla"
             android:theme="@style/AppTheme.popup"></activity>

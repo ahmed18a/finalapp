@@ -97,12 +97,5 @@ public class signup extends AppCompatActivity {
                 });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent i=getIntent();
-        birthday.setText(i.getStringExtra("date"));
-        Toast.makeText(this, ""+birthday.getText().toString(), Toast.LENGTH_SHORT).show();
-    }
 }
 

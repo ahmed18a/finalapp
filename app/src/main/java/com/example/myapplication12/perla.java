@@ -27,7 +27,7 @@ public class perla extends AppCompatActivity {
     FirebaseDatabase database ;
     DatabaseReference myRef;
     TextView absence,late;
-    ImageView addabsence,addlate;
+    ImageView addabsence,addlate,minusa,minusl;
     FirebaseUser user;
     String uid;
     Button delete;
@@ -111,6 +111,75 @@ public class perla extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+        minusa=findViewById(R.id.minusa);
+        minusa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=getIntent();
+                String s=i.getStringExtra("name");
+                String z=i.getStringExtra("class");
+                myRef=database.getReference("students"+z+uid);
+                Query query=myRef.orderByChild("name").equalTo(s);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for (DataSnapshot d:dataSnapshot.getChildren()) {
+                                if(Integer.parseInt(d.child("absence").getValue().toString())!=0) {
+                                    student s = new student(d.child("name").getValue().toString(), Float.parseFloat(d.child("id").getValue().toString()), d.child("clas").getValue().toString(), Integer.parseInt(d.child("absence").getValue().toString()), Integer.parseInt(d.child("late").getValue().toString()));
+                                    s.setAbsence(s.getAbsence() - 1);
+                                    myRef.child(d.getKey()).setValue(s);
+                                    absence.setText(String.valueOf(Integer.parseInt(d.child("absence").getValue().toString()) - 1));
+                                    late.setText(d.child("late").getValue().toString());
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+
+        minusl=findViewById(R.id.minusl);
+        minusl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=getIntent();
+                String s=i.getStringExtra("name");
+                String z=i.getStringExtra("class");
+                myRef=database.getReference("students"+z+uid);
+                Query query=myRef.orderByChild("name").equalTo(s);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            for (DataSnapshot d:dataSnapshot.getChildren()) {
+                                if(Integer.parseInt(d.child("late").getValue().toString())!=0) {
+                                    student s = new student(d.child("name").getValue().toString(), Float.parseFloat(d.child("id").getValue().toString()), d.child("clas").getValue().toString(), Integer.parseInt(d.child("absence").getValue().toString()), Integer.parseInt(d.child("late").getValue().toString()));
+                                    s.setLate(s.getLate() - 1);
+                                    myRef.child(d.getKey()).setValue(s);
+                                    absence.setText(d.child("absence").getValue().toString());
+                                    late.setText(String.valueOf(Integer.parseInt(d.child("late").getValue().toString()) - 1));
+                                }
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
         Intent i=getIntent();
